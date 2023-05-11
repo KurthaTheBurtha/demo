@@ -3,12 +3,12 @@ class CommentsController < ApplicationController
 
   def create
     @post.comments.create! params.required(:comment).permit(:content)
-    CommentsMailer.submitted(comment).deliver_later
+    CommentsMailer.submitted(@comment).deliver_later
     redirect_to @post
   end
 
   private
-  def set_post
-    @post = Post.find(params[:post_id])
-  end
+    def set_post
+      @post = Post.find(params[:post_id])
+    end
 end
